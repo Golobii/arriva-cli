@@ -1,4 +1,4 @@
-package main
+package auth
 
 import (
 	"fmt"
@@ -9,7 +9,7 @@ func formatMonth(month time.Month) string {
 	if month < 10 {
 		return fmt.Sprintf("0%d", month)
 	}
-    return fmt.Sprintf("%d", month)
+	return fmt.Sprintf("%d", month)
 }
 
 func GetCurrentTimeStamp() string {

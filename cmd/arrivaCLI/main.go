@@ -5,6 +5,9 @@ import (
 	"os"
 	"strconv"
 	"time"
+
+	"arriva-cli/pkg/api"
+	"arriva-cli/pkg/auth"
 )
 
 func main() {
@@ -13,9 +16,9 @@ func main() {
 		return
 	}
 
-	timeStamp := GetCurrentTimeStamp()
-	tok := GenerateToken(timeStamp)
-	ds := FetchDepartureStations(timeStamp, tok)
+	timeStamp := auth.GetCurrentTimeStamp()
+	tok := auth.GenerateToken(timeStamp)
+	ds := api.FetchDepartureStations(timeStamp, tok)
 
 	switch os.Args[1] {
 	case "list":
@@ -27,7 +30,7 @@ func main() {
 		fmt.Println("Not implemented yet.")
 		return
 	default:
-		res := FetchDepartures(timeStamp, tok, strconv.Itoa(GetStationByName(os.Args[1], ds)),
+		res := api.FetchDepartures(timeStamp, tok, strconv.Itoa(GetStationByName(os.Args[1], ds)),
 			strconv.Itoa(GetStationByName(os.Args[2], ds)), fmt.Sprintf("%d-%s", time.Now().Year(), os.Args[3]))
 		PrettyPrintDepartures(res)
 		break
@@ -35,17 +38,19 @@ func main() {
 
 }
 
-func PrettyPrintDepartures(departures DeparturesResponse) {
+// TODO: clean this file
+
+func PrettyPrintDepartures(departures api.DeparturesResponse) {
 	fmt.Println("2022-03-16")
 	for _, departure := range departures[0].Departures {
-		fmt.Printf("*- %s -- %s\n", "Mengeš Lovec", departure.RodIodh)
+		fmt.Printf("*- %s -- %s\n", "Mengeš Lovec", departure.RodIodh) // TODO: add right names
 		fmt.Println("│  ...")
 		fmt.Printf("*- %s -- %s\n", "Kamnik Metalka", departure.RodIpri)
 		fmt.Printf("Trajanje: %s\n\n", formatTime(departure.RodCas))
 	}
 }
 
-func GetStationByName(name string, ds DepartureStations) int {
+func GetStationByName(name string, ds api.DepartureStations) int {
 
 	for _, station := range ds[0].DepartureStations {
 		if station.PosNaz == name {

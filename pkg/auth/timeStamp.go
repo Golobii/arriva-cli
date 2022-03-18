@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-func formatMonth(month time.Month) string {
+func FormatMonthDay(month int) string {
 	if month < 10 {
 		return fmt.Sprintf("0%d", month)
 	}
@@ -17,7 +17,7 @@ func GetCurrentTimeStamp() string {
 	year, month, day := date.Date()
 	hour := date.Hour()
 
-	fDate := fmt.Sprintf("%d%s%d%d0000", year, formatMonth(month), day, hour)
+	fDate := fmt.Sprintf("%d%s%s%d0000", year, FormatMonthDay(int(month)), FormatMonthDay(day), hour)
 
 	return fDate
 }

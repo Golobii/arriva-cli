@@ -3,13 +3,14 @@ package console
 import (
 	"arriva-cli/pkg/api"
 	"fmt"
+	"time"
 )
 
-func PrettyPrintDepartures(departures api.DeparturesResponse, startStation string, endStation string) {
+func PrettyPrintDepartures(departures api.DeparturesResponse, startStation string, endStation string, date string) {
 	// TODO: display the right date
-	fmt.Println("2022-03-16")
+	fmt.Printf("%d-%s\n", time.Now().Year(), date)
 	for _, departure := range departures[0].Departures {
-		fmt.Printf("*- %s -- %s\n", startStation, departure.RodIodh) // TODO: add right names
+		fmt.Printf("*- %s -- %s\n", startStation, departure.RodIodh)
 		fmt.Println("│  ...")
 		fmt.Printf("*- %s -- %s\n", endStation, departure.RodIpri)
 		fmt.Printf("Trajanje: %s\n\n", formatTime(departure.RodCas))

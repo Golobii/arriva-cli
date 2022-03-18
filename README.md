@@ -13,7 +13,7 @@ go build -o bin/arriva-cli cmd/arriva-cli/main.go
 
 ```bash
 ./arriva-cli help   # Prints the help section (WIP)
-./arriva-cli date   # Prints the current date (WIP)
+./arriva-cli date   # Prints the current date
 ./arriva-cli list   # Lists all stations
 ./arriva-cli "[start station]" "[end station]" [date] # Displays busses
 ```

@@ -10,20 +10,36 @@ import (
 	"time"
 )
 
-func HandleSearch(ds api.DepartureStations, timeStamp string, tok string) {
+func HandleSearch(ds api.DepartureStations, timeStamp string, tok string) int {
 	if len(os.Args) < 4 {
-		fmt.Println("Not enough arguments supplied! Try: arrivaCLI help")
-		os.Exit(1)
+		fmt.Println("Not enough arguments supplied! Try: arriva-cli help")
+		return -1
 	}
-	res := api.FetchDepartures(timeStamp, tok, strconv.Itoa(getStationByName(os.Args[1], ds)),
-		strconv.Itoa(getStationByName(os.Args[2], ds)), fmt.Sprintf("%d-%s", time.Now().Year(), os.Args[3]))
+
+	station1 := getStationByName(os.Args[1], ds)
+	station2 := getStationByName(os.Args[2], ds)
+	if station1 == -1 {
+		fmt.Printf("Station %s doesn't exist.\n", os.Args[1])
+		return -1
+	} else if station2 == -1 {
+		fmt.Printf("Station %s doesn't exist.\n", os.Args[2])
+		return -1
+	}
+
+	if len(os.Args[3]) < 5 {
+		fmt.Println("Invalid date format. Try: arriva-cli help")
+		return -1
+	}
+
+	res := api.FetchDepartures(timeStamp, tok, strconv.Itoa(station2),
+		strconv.Itoa(station1), fmt.Sprintf("%d-%s", time.Now().Year(), os.Args[3]))
 
 	if res[0].Error != "0" {
 		fmt.Println("No routes found.")
-		os.Exit(0)
+		return -1
 	}
 	ui.PrettyPrintDepartures(res, os.Args[1], os.Args[2], os.Args[3])
-
+	return 0
 }
 
 func getStationByName(name string, ds api.DepartureStations) int {

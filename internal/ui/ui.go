@@ -3,12 +3,20 @@ package console
 import (
 	"arriva-cli/pkg/api"
 	"fmt"
+	"strings"
 	"time"
 )
 
+func formatName(name string) string {
+	return strings.Title(strings.ToLower(name))
+}
+
 func PrettyPrintDepartures(departures api.DeparturesResponse, startStation string, endStation string, date string) {
-	// TODO: display the right date
 	fmt.Printf("%d-%s\n", time.Now().Year(), date)
+
+	startStation = formatName(startStation)
+	endStation = formatName(endStation)
+
 	for _, departure := range departures[0].Departures {
 		fmt.Printf("*- %s -- %s\n", startStation, departure.RodIodh)
 		fmt.Println("│  ...")

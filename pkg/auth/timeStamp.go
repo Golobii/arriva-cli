@@ -17,7 +17,5 @@ func GetCurrentTimeStamp() string {
 	year, month, day := date.Date()
 	hour := date.Hour()
 
-	fDate := fmt.Sprintf("%d%s%s%d0000", year, FormatMonthDay(int(month)), FormatMonthDay(day), hour)
-
-	return fDate
+	return fmt.Sprintf("%d%s%s%d0000", year, FormatMonthDay(int(month)), FormatMonthDay(day), hour)
 }

@@ -31,7 +31,11 @@ func main() {
 		}
 		return
 	} else {
-		commands.HandleSearch(ds, timeStamp, tok)
+		if len(os.Args) < 4 {
+			fmt.Println("Not enough arguments supplied! Try: arriva-cli help")
+			return
+		}
+		commands.HandleSearch(ds, timeStamp, tok, os.Args[1], os.Args[2], os.Args[3])
 		return
 	}
 

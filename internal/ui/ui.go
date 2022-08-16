@@ -1,8 +1,8 @@
 package console
 
 import (
-	"arriva-cli/pkg/api"
 	"fmt"
+	"github.com/Golobii/arriva-cli/pkg/api"
 	"strings"
 	"time"
 )

@@ -1,9 +1,9 @@
 package commands
 
 import (
-	ui "arriva-cli/internal/ui"
-	"arriva-cli/pkg/api"
 	"fmt"
+	ui "github.com/Golobii/arriva-cli/internal/ui"
+	"github.com/Golobii/arriva-cli/pkg/api"
 	"strconv"
 	"strings"
 	"time"

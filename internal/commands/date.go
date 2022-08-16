@@ -1,8 +1,8 @@
 package commands
 
 import (
-	"arriva-cli/pkg/auth"
 	"fmt"
+	"github.com/Golobii/arriva-cli/pkg/auth"
 	"time"
 )
 

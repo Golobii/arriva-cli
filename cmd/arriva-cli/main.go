@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"os"
 
-	"arriva-cli/internal/commands"
-	"arriva-cli/pkg/api"
-	"arriva-cli/pkg/auth"
+	"github.com/Golobii/arriva-cli/internal/commands"
+	"github.com/Golobii/arriva-cli/pkg/api"
+	"github.com/Golobii/arriva-cli/pkg/auth"
 )
 
 func main() {
